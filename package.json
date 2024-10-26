@@ -1,0 +1,18 @@
+{
+  "name": "api_restic",
+  "version": "1.0.0",
+  "description": "Repositório para estudo de criação de apis na trilha de desenvolvimento Mobile da RESTIC36",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --exec node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1",
+    "nodemon": "^3.1.7",
+    "uuid": "^10.0.0"
+  }
+}
