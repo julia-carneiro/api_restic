@@ -1,0 +1,23 @@
+# Ignora a pasta node_modules, onde estão as dependências
+node_modules/
+
+# Ignora logs de depuração
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignora variáveis de ambiente (como senhas e chaves)
+.env
+
+# Ignora o diretório de cache do npm
+.npm
+
+# Ignora diretórios e arquivos de teste locais
+.vscode/
+.idea/
+.DS_Store
+*.log
+
+# Ignora arquivos de compilação
+dist/
+build/
