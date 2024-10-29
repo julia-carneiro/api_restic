@@ -1,32 +1,38 @@
 const express = require('express');
-const { create, update, remove, findAll } = require('./repositories/vagasRepository');
-
+const {create, update, remove, findAlunos} = require('./repositories/alunoRepositoy')
 const app = express();
-const port = 3000;  
+const port = 3000; 
 
-//Cria vaga
-app.post('/vagas', (req, res) => {
-    const { descricao, titulo, dataCadastro, telefone, empresa } = req.body;
-    const vaga = create({ descricao, titulo, dataCadastro, telefone, empresa });
-    res.status(201).json(vaga);
+app.use(express.json());
+
+app.post('/alunos', (req, res) => {
+    const { nome, email, nome_curso } = req.body;
+    const aluno = create({nome, email, nome_curso})
+    res.status(201).json(aluno); 
 });
 
-//Get vaga
-app.get('/vagas', (req, res) => {
-    const vagas = findAll();
-    res.json(vagas);
+app.get('/alunos', (req, res) => {
+    const allAlunos = findAlunos(); // Retorna todos os alunos
+    res.json(allAlunos);
 });
 
-//Atualizar
-app.put('/vagas/:id', (req, res) => {
+app.get('/alunos/:id', (req, res) => {
     const { id } = req.params;
-    const { descricao, titulo, dataCadastro, telefone, empresa } = req.body;
-    const vaga = update(id, { descricao, titulo, dataCadastro, telefone, empresa });
-    res.json(vaga);
+    const aluno = findAlunos(id); // Retorna o aluno com o id fornecido
+    if (!aluno) {
+        return res.status(404).json({ erro: 'Aluno não encontrado' }); 
+    }
+    res.json(aluno);
 });
 
-//Deletar
-app.delete('/vagas/:id', (req, res) => {
+app.put('/alunos/:id', (req, res) => {
+    const { id } = req.params;
+    const { nome, email, nome_curso }  = req.body;
+    const aluno = update(id, { nome, email, nome_curso } );
+    res.json(aluno);
+});
+
+app.delete('/alunos/:id', (req, res) => {
     const { id } = req.params;
     remove(id);
     res.status(204).send();
@@ -34,4 +40,4 @@ app.delete('/vagas/:id', (req, res) => {
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
-});
+})
